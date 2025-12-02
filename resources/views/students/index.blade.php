@@ -45,17 +45,17 @@
                                 <td>
                                     <span class="badge bg-info">{{ $registration->languageLevel->name }}</span>
                                     <br>
-                                    <small class="text-muted">{{ number_format($registration->languageLevel->price, 2) }} €</small>
+                                    <small class="text-muted">{{ number_format($registration->languageLevel->price, 0) }} XOF</small>
                                 </td>
                                 <td class="text-success fw-bold">
-                                    {{ number_format($registration->total_paid, 2) }} €
+                                    {{ number_format($registration->total_paid, 0) }} XOF
                                 </td>
                                 <td>
                                     @if($registration->is_fully_paid)
                                         <span class="badge bg-success">Soldé</span>
                                     @else
                                         <span class="text-danger fw-bold">
-                                            {{ number_format($registration->remaining_amount, 2) }} €
+                                            {{ number_format($registration->remaining_amount, 0) }} XOF
                                         </span>
                                     @endif
                                 </td>
@@ -74,10 +74,21 @@
                                            class="btn btn-sm btn-info" title="Voir détails">
                                             <i class="fas fa-eye"></i>
                                         </a>
+                                        <a href="{{ route('students.edit', $student) }}" 
+                                           class="btn btn-sm btn-warning" title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
                                         <a href="{{ route('payments.create', $registration) }}" 
                                            class="btn btn-sm btn-success" title="Ajouter paiement">
                                             <i class="fas fa-money-bill"></i>
                                         </a>
+                                        <form action="{{ route('students.destroy', $student) }}" method="POST" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger" title="Supprimer">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>

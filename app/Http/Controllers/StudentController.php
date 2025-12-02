@@ -86,4 +86,43 @@ class StudentController extends Controller
         $student->load(['registrations.languageLevel', 'registrations.payments', 'needs']);
         return view('students.show', compact('student'));
     }
+
+    // Formulaire d'édition d'un étudiant
+    public function edit(Student $student)
+    {
+        $languageLevels = LanguageLevel::all();
+        return view('students.edit', compact('student', 'languageLevels'));
+    }
+
+    // Mettre à jour un étudiant
+    public function update(Request $request, Student $student)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:students,email,' . $student->id,
+            'phone' => 'nullable|string',
+            'address' => 'nullable|string',
+            'date_of_birth' => 'nullable|date'
+        ]);
+
+        $student->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'date_of_birth' => $request->date_of_birth
+        ]);
+
+        return redirect()->route('students.show', $student)
+            ->with('success', 'Étudiant modifié avec succès!');
+    }
+
+    // Supprimer un étudiant
+    public function destroy(Student $student)
+    {
+        $student->delete();
+        
+        return redirect()->route('students.index')
+            ->with('success', 'Étudiant supprimé avec succès!');
+    }
 }

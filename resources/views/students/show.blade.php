@@ -3,6 +3,9 @@
 @section('title', 'Détails de ' . $student->name)
 
 @section('actions')
+    <a href="{{ route('students.edit', $student) }}" class="btn btn-warning me-2">
+        <i class="fas fa-edit me-2"></i>Modifier
+    </a>
     <a href="{{ route('students.index') }}" class="btn btn-secondary">
         <i class="fas fa-arrow-left me-2"></i>Retour
     </a>
@@ -66,7 +69,7 @@
                 <h6 class="mb-0">
                     <i class="fas fa-book me-2"></i>
                     {{ $registration->languageLevel->name }} 
-                    - {{ number_format($registration->languageLevel->price, 2) }}€
+                    - {{ number_format($registration->languageLevel->price, 0) }} XOF
                 </h6>
                 <span class="badge bg-light text-dark">
                     {{ \Carbon\Carbon::parse($registration->start_date)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($registration->end_date)->format('d/m/Y') }}
@@ -92,14 +95,14 @@
                     <div class="col-md-4">
                         <div class="border rounded p-2">
                             <small class="text-muted d-block">Total Payé</small>
-                            <strong class="text-success">{{ number_format($registration->total_paid, 2) }} €</strong>
+                            <strong class="text-success">{{ number_format($registration->total_paid, 0) }} XOF</strong>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="border rounded p-2">
                             <small class="text-muted d-block">Reste à Payer</small>
                             <strong class="{{ $registration->is_fully_paid ? 'text-success' : 'text-danger' }}">
-                                {{ number_format($registration->remaining_amount, 2) }} €
+                                {{ number_format($registration->remaining_amount, 0) }} XOF
                             </strong>
                         </div>
                     </div>
@@ -131,7 +134,7 @@
                                 @foreach($registration->payments as $payment)
                                 <tr>
                                     <td>{{ \Carbon\Carbon::parse($payment->payment_date)->format('d/m/Y') }}</td>
-                                    <td class="text-success fw-bold">{{ number_format($payment->amount_paid, 2) }} €</td>
+                                    <td class="text-success fw-bold">{{ number_format($payment->amount_paid, 0) }} XOF</td>
                                     <td>
                                         <span class="badge bg-secondary">{{ $payment->payment_method }}</span>
                                     </td>

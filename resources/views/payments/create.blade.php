@@ -23,11 +23,11 @@
                     <h6 class="alert-heading">{{ $registration->student->name }}</h6>
                     <p class="mb-1">
                         <strong>Niveau :</strong> {{ $registration->languageLevel->name }}<br>
-                        <strong>Prix du cours :</strong> {{ number_format($registration->languageLevel->price, 2) }} €<br>
-                        <strong>Déjà payé :</strong> {{ number_format($registration->total_paid, 2) }} €<br>
+                        <strong>Prix du cours :</strong> {{ number_format($registration->languageLevel->price, 0) }} XOF<br>
+                        <strong>Déjà payé :</strong> {{ number_format($registration->total_paid, 0) }} XOF<br>
                         <strong>Reste à payer :</strong> 
                         <span class="{{ $registration->remaining_amount > 0 ? 'text-danger fw-bold' : 'text-success' }}">
-                            {{ number_format($registration->remaining_amount, 2) }} €
+                            {{ number_format($registration->remaining_amount, 0) }} XOF
                         </span>
                     </p>
                 </div>
@@ -41,7 +41,7 @@
                                name="amount_paid" value="{{ old('amount_paid') }}" 
                                max="{{ $registration->remaining_amount }}" required>
                         <div class="form-text">
-                            Maximum : {{ number_format($registration->remaining_amount, 2) }} €
+                            Maximum : {{ number_format($registration->remaining_amount, 0) }} XOF
                         </div>
                     </div>
 

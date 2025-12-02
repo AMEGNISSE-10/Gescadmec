@@ -46,10 +46,10 @@
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                             Revenus Total</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($stats['total_income'], 2) }} €</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ number_format($stats['total_income'], 0) }} XOF</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-euro-sign fa-2x text-gray-300"></i>
+                        <i class="fas fa-coins fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
@@ -133,7 +133,7 @@
                             @foreach($recentPayments as $payment)
                             <tr>
                                 <td>{{ $payment->registration->student->name }}</td>
-                                <td class="text-success fw-bold">{{ number_format($payment->amount_paid, 2) }} €</td>
+                                <td class="text-success fw-bold">{{ number_format($payment->amount_paid, 0) }} XOF</td>
                                 <td>{{ $payment->created_at->format('d/m/Y') }}</td>
                             </tr>
                             @endforeach

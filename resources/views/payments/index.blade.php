@@ -39,9 +39,9 @@
                             <tr>
                                 <td><strong>{{ $levelName }}</strong></td>
                                 <td>{{ $stat['student_count'] }}</td>
-                                <td>{{ number_format($stat['total_price'], 2) }} €</td>
-                                <td class="text-success fw-bold">{{ number_format($stat['total_paid'], 2) }} €</td>
-                                <td class="text-danger">{{ number_format($stat['total_remaining'], 2) }} €</td>
+                                <td>{{ number_format($stat['total_price'], 0) }} XOF</td>
+                                <td class="text-success fw-bold">{{ number_format($stat['total_paid'], 0) }} XOF</td>
+                                <td class="text-danger">{{ number_format($stat['total_remaining'], 0) }} XOF</td>
                                 <td>
                                     <div class="progress" style="height: 20px;">
                                         <div class="progress-bar 
@@ -58,9 +58,9 @@
                             <tr>
                                 <th>TOTAL</th>
                                 <th>{{ collect($stats)->sum('student_count') }}</th>
-                                <th>{{ number_format(collect($stats)->sum('total_price'), 2) }} €</th>
-                                <th>{{ number_format(collect($stats)->sum('total_paid'), 2) }} €</th>
-                                <th>{{ number_format(collect($stats)->sum('total_remaining'), 2) }} €</th>
+                                <th>{{ number_format(collect($stats)->sum('total_price'), 0) }} XOF</th>
+                                <th>{{ number_format(collect($stats)->sum('total_paid'), 0) }} XOF</th>
+                                <th>{{ number_format(collect($stats)->sum('total_remaining'), 0) }} XOF</th>
                                 <th>
                                     @php
                                         $totalPrice = collect($stats)->sum('total_price');
@@ -94,19 +94,19 @@
                 
                 <div class="text-center mb-4">
                     <div class="display-4 text-primary fw-bold">
-                        {{ number_format($totalPaid, 0) }}€
+                        {{ number_format($totalPaid, 0) }} XOF
                     </div>
                     <small class="text-muted">Total perçu</small>
                 </div>
 
                 <div class="mb-3">
                     <strong>Total attendu :</strong>
-                    <span class="float-end">{{ number_format($totalExpected, 2) }} €</span>
+                    <span class="float-end">{{ number_format($totalExpected, 0) }} XOF</span>
                 </div>
                 
                 <div class="mb-3">
                     <strong>Reste à percevoir :</strong>
-                    <span class="float-end text-danger">{{ number_format($totalRemaining, 2) }} €</span>
+                    <span class="float-end text-danger">{{ number_format($totalRemaining, 0) }} XOF</span>
                 </div>
 
                 <div class="mb-3">
@@ -123,7 +123,7 @@
                 <div class="mb-2">
                     <small>{{ $levelName }}</small>
                     <div class="d-flex justify-content-between">
-                        <small class="text-muted">{{ number_format($stat['total_paid'], 0) }}€</small>
+                        <small class="text-muted">{{ number_format($stat['total_paid'], 0) }} XOF</small>
                         <small class="text-muted">
                             {{ $totalPaid > 0 ? number_format(($stat['total_paid'] / $totalPaid) * 100, 1) : 0 }}%
                         </small>
@@ -166,7 +166,7 @@
                                     <td>
                                         <span class="badge bg-info">{{ $payment->registration->languageLevel->name }}</span>
                                     </td>
-                                    <td class="text-success fw-bold">{{ number_format($payment->amount_paid, 2) }} €</td>
+                                    <td class="text-success fw-bold">{{ number_format($payment->amount_paid, 0) }} XOF</td>
                                     <td>
                                         <span class="badge bg-secondary">{{ $payment->payment_method }}</span>
                                     </td>

@@ -50,11 +50,11 @@
         <tbody>
             <tr>
                 <td>Paiement pour cours de {{ $payment->registration->languageLevel->name }}</td>
-                <td>{{ number_format($payment->amount_paid, 2) }} €</td>
+                <td>{{ number_format($payment->amount_paid, 0) }} XOF</td>
             </tr>
             <tr class="total">
                 <td><strong>TOTAL PAYÉ</strong></td>
-                <td><strong>{{ number_format($payment->amount_paid, 2) }} €</strong></td>
+                <td><strong>{{ number_format($payment->amount_paid, 0) }} XOF</strong></td>
             </tr>
         </tbody>
     </table>
@@ -62,9 +62,9 @@
     <div class="receipt-info">
         <p><strong>Informations complémentaires:</strong></p>
         <p>
-            Prix total du cours: {{ number_format($payment->registration->languageLevel->price, 2) }} €<br>
-            Total payé à ce jour: {{ number_format($payment->registration->total_paid, 2) }} €<br>
-            Reste à payer: {{ number_format($payment->registration->remaining_amount, 2) }} €
+            Prix total du cours: {{ number_format($payment->registration->languageLevel->price, 0) }} XOF<br>
+            Total payé à ce jour: {{ number_format($payment->registration->total_paid, 0) }} XOF<br>
+            Reste à payer: {{ number_format($payment->registration->remaining_amount, 0) }} XOF
         </p>
     </div>
 

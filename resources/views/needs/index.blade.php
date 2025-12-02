@@ -57,11 +57,19 @@
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-primary" 
+                                    <button type="button" class="btn btn-sm btn-info" 
                                             data-bs-toggle="modal" 
-                                            data-bs-target="#needModal{{ $need->id }}">
-                                        <i class="fas fa-edit"></i>
+                                            data-bs-target="#needModal{{ $need->id }}"
+                                            title="Mettre à jour le statut">
+                                        <i class="fas fa-tasks"></i>
                                     </button>
+                                    <form action="{{ route('needs.destroy', $need) }}" method="POST" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce besoin ?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Supprimer">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

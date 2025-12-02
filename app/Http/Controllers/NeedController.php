@@ -59,4 +59,41 @@ class NeedController extends Controller
 
         return redirect()->back()->with('success', 'Statut mis à jour avec succès!');
     }
+
+    // Formulaire d'édition d'un besoin
+    public function edit(Need $need)
+    {
+        $students = Student::all();
+        return view('needs.edit', compact('need', 'students'));
+    }
+
+    // Mettre à jour un besoin
+    public function update(Request $request, Need $need)
+    {
+        $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'description' => 'required|string',
+            'status' => 'nullable|in:pending,in_progress,resolved',
+            'response' => 'nullable|string'
+        ]);
+
+        $need->update([
+            'student_id' => $request->student_id,
+            'description' => $request->description,
+            'status' => $request->status ?? $need->status,
+            'response' => $request->response
+        ]);
+
+        return redirect()->route('needs.index')
+            ->with('success', 'Besoin modifié avec succès!');
+    }
+
+    // Supprimer un besoin
+    public function destroy(Need $need)
+    {
+        $need->delete();
+        
+        return redirect()->route('needs.index')
+            ->with('success', 'Besoin supprimé avec succès!');
+    }
 }

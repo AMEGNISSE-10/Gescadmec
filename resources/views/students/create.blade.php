@@ -68,7 +68,7 @@
                                             data-price="{{ $level->price }}"
                                             data-duration="{{ $level->duration_days }}"
                                             {{ old('language_level_id') == $level->id ? 'selected' : '' }}>
-                                        {{ $level->name }} - {{ number_format($level->price, 2) }}€ 
+                                        {{ $level->name }} - {{ number_format($level->price, 0) }} XOF 
                                         ({{ $level->duration_days }} jours)
                                     </option>
                                 @endforeach
@@ -113,7 +113,7 @@
                             <div class="alert alert-info">
                                 <i class="fas fa-info-circle me-2"></i>
                                 <strong>Prix du cours : </strong>
-                                <span id="course_price">0.00 €</span> | 
+                                <span id="course_price">0 XOF</span> | 
                                 <strong>Durée : </strong>
                                 <span id="course_duration">0 jours</span>
                             </div>
@@ -147,10 +147,10 @@
             if (selectedOption.value) {
                 const price = selectedOption.getAttribute('data-price');
                 const duration = selectedOption.getAttribute('data-duration');
-                coursePrice.textContent = parseFloat(price).toFixed(2) + ' €';
+                coursePrice.textContent = parseFloat(price).toFixed(0) + ' XOF';
                 courseDuration.textContent = duration + ' jours';
             } else {
-                coursePrice.textContent = '0.00 €';
+                coursePrice.textContent = '0 XOF';
                 courseDuration.textContent = '0 jours';
             }
         }
